@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For connection pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: <%= ENV["DB_NAME_DEVELOPMENT"] %>
+
+test:
+  <<: *default
+  database: <%= ENV["DB_NAME_TEST"] %>
+
+production:
+  <<: *default
+  database: <%= ENV["DB_NAME_PRODUCTION"] %>
+  # In production, you might also use DATABASE_URL instead (common on Heroku, Fly.io, etc.)
+  # url: <%= ENV["DATABASE_URL"] %>
